@@ -10,14 +10,18 @@ import reducer from './reducers'
 import 'antd/dist/antd.css'
 import './styles/App.css'
 import { getAllProducts } from './actions'
+// 安装redux-devtools-extension的可视化工具。
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 const middleware = [ thunk ]
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
 }
 
-const store = createStore(reducer,
-  applyMiddleware(...middleware)
+const store = createStore(
+  reducer,
+  composeWithDevTools(),
+  applyMiddleware(...middleware),
 )
 
 store.dispatch(getAllProducts())
